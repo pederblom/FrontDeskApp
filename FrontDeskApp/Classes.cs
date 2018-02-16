@@ -8,11 +8,15 @@ namespace classes
 {
     class User {
 
-        string email;
-        string password;
-        string firstname;
-        string lastname;
+        public string email { get; set; }
+        public string password { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
     
+        public User()
+        {
+
+        }
         public User (string email, string password, string firstname, string lastname)
         {
             this.email = email;
@@ -25,13 +29,17 @@ namespace classes
     class Room
     {
 
-        int ID;
-        int beds;
-        int size;
-        bool smoker;
-        int quality;
-        bool available;
+        public int ID { get; set; }
+        public int beds { get; set; }
+        public int size { get; set; }
+        public bool smoker { get; set; }
+        public int quality { get; set; }
+        public bool available { get; set; }
 
+        public Room()
+        {
+
+        }
         public Room(int ID, int beds, int size, bool smoker, int quality, bool available)
         {
             this.ID = ID;
@@ -45,12 +53,16 @@ namespace classes
 
     class Request
     {
-        int ID;
-        int type;
-        string comment;
-        int status;
-        Room room;
+        public int ID { get; set; }
+        public int type { get; set; }
+        public string comment { get; set; }
+        public int status { get; set; }
+        public Room room { get; set; }
 
+        public Request()
+        {
+
+        }
         public Request (int ID, int type, string comment, int status, Room room)
         {
             this.ID = ID;
@@ -64,12 +76,17 @@ namespace classes
 
     class Reservation
     {
-        int ID;
-        Room room;
-        DateTime checkin;
-        DateTime checkout;
-        User user;
-        bool confirmed;
+        public int ID { get; set; }
+        public Room room { get; set; }
+        public DateTime checkin { get; set; }
+        public DateTime checkout { get; set; }
+        public User user { get; set; }
+        public bool confirmed { get; set; }
+
+        public Reservation ()
+        {
+
+        }
 
         public Reservation (int ID, Room room, DateTime checkin, DateTime checkout, User user, bool confirmed)
         {
