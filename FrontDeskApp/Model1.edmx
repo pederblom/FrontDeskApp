@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DAT154Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="REQUEST">
+          <Key>
+            <PropertyRef Name="req_nr" />
+          </Key>
+          <Property Name="req_nr" Type="int" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="comment" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="room_nr" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RESERVATION">
+          <Key>
+            <PropertyRef Name="res_ID" />
+          </Key>
+          <Property Name="res_ID" Type="int" Nullable="false" />
+          <Property Name="room_nr" Type="int" Nullable="false" />
+          <Property Name="checkIn_Date" Type="date" Nullable="false" />
+          <Property Name="checkOut_Date" Type="date" Nullable="false" />
+          <Property Name="e_mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="confirmed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROOM">
+          <Key>
+            <PropertyRef Name="room_ID" />
+          </Key>
+          <Property Name="room_ID" Type="int" Nullable="false" />
+          <Property Name="nr_beds" Type="int" Nullable="false" />
+          <Property Name="size" Type="int" Nullable="false" />
+          <Property Name="smoker" Type="bit" Nullable="false" />
+          <Property Name="quality" Type="int" Nullable="false" />
+          <Property Name="available" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="e_mail_ID" />
+          </Key>
+          <Property Name="e_mail_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="f_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="l_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_REQUEST_ROOM">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="1" />
+          <End Role="REQUEST" Type="Self.REQUEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="room_ID" />
+            </Principal>
+            <Dependent Role="REQUEST">
+              <PropertyRef Name="room_nr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATION_ROOM">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="1" />
+          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="room_ID" />
+            </Principal>
+            <Dependent Role="RESERVATION">
+              <PropertyRef Name="room_nr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATION_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="e_mail_ID" />
+            </Principal>
+            <Dependent Role="RESERVATION">
+              <PropertyRef Name="e_mail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DAT154ModelStoreContainer">
+          <EntitySet Name="REQUEST" EntityType="Self.REQUEST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESERVATION" EntityType="Self.RESERVATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROOM" EntityType="Self.ROOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_REQUEST_ROOM" Association="Self.FK_REQUEST_ROOM">
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="REQUEST" EntitySet="REQUEST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATION_ROOM" Association="Self.FK_RESERVATION_ROOM">
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="RESERVATION" EntitySet="RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATION_USER" Association="Self.FK_RESERVATION_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="RESERVATION" EntitySet="RESERVATION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DAT154Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="REQUEST">
+          <Key>
+            <PropertyRef Name="req_nr" />
+          </Key>
+          <Property Name="req_nr" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="room_nr" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ROOM" Relationship="Self.FK_REQUEST_ROOM" FromRole="REQUEST" ToRole="ROOM" />
+        </EntityType>
+        <EntityType Name="RESERVATION">
+          <Key>
+            <PropertyRef Name="res_ID" />
+          </Key>
+          <Property Name="res_ID" Type="Int32" Nullable="false" />
+          <Property Name="room_nr" Type="Int32" Nullable="false" />
+          <Property Name="checkIn_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="checkOut_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="e_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="confirmed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ROOM" Relationship="Self.FK_RESERVATION_ROOM" FromRole="RESERVATION" ToRole="ROOM" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_RESERVATION_USER" FromRole="RESERVATION" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="ROOM">
+          <Key>
+            <PropertyRef Name="room_ID" />
+          </Key>
+          <Property Name="room_ID" Type="Int32" Nullable="false" />
+          <Property Name="nr_beds" Type="Int32" Nullable="false" />
+          <Property Name="size" Type="Int32" Nullable="false" />
+          <Property Name="smoker" Type="Boolean" Nullable="false" />
+          <Property Name="quality" Type="Int32" Nullable="false" />
+          <Property Name="available" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="REQUESTs" Relationship="Self.FK_REQUEST_ROOM" FromRole="ROOM" ToRole="REQUEST" />
+          <NavigationProperty Name="RESERVATIONs" Relationship="Self.FK_RESERVATION_ROOM" FromRole="ROOM" ToRole="RESERVATION" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="e_mail_ID" />
+          </Key>
+          <Property Name="e_mail_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="f_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="l_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RESERVATIONs" Relationship="Self.FK_RESERVATION_USER" FromRole="USER" ToRole="RESERVATION" />
+        </EntityType>
+        <Association Name="FK_REQUEST_ROOM">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="1" />
+          <End Role="REQUEST" Type="Self.REQUEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="room_ID" />
+            </Principal>
+            <Dependent Role="REQUEST">
+              <PropertyRef Name="room_nr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATION_ROOM">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="1" />
+          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="room_ID" />
+            </Principal>
+            <Dependent Role="RESERVATION">
+              <PropertyRef Name="room_nr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATION_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="e_mail_ID" />
+            </Principal>
+            <Dependent Role="RESERVATION">
+              <PropertyRef Name="e_mail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="REQUESTs" EntityType="Self.REQUEST" />
+          <EntitySet Name="RESERVATIONs" EntityType="Self.RESERVATION" />
+          <EntitySet Name="ROOMs" EntityType="Self.ROOM" />
+          <EntitySet Name="USERs" EntityType="Self.USER" />
+          <AssociationSet Name="FK_REQUEST_ROOM" Association="Self.FK_REQUEST_ROOM">
+            <End Role="ROOM" EntitySet="ROOMs" />
+            <End Role="REQUEST" EntitySet="REQUESTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATION_ROOM" Association="Self.FK_RESERVATION_ROOM">
+            <End Role="ROOM" EntitySet="ROOMs" />
+            <End Role="RESERVATION" EntitySet="RESERVATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATION_USER" Association="Self.FK_RESERVATION_USER">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="RESERVATION" EntitySet="RESERVATIONs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DAT154ModelStoreContainer" CdmEntityContainer="HotelEntities">
+          <EntitySetMapping Name="REQUESTs">
+            <EntityTypeMapping TypeName="DAT154Model.REQUEST">
+              <MappingFragment StoreEntitySet="REQUEST">
+                <ScalarProperty Name="req_nr" ColumnName="req_nr" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="room_nr" ColumnName="room_nr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESERVATIONs">
+            <EntityTypeMapping TypeName="DAT154Model.RESERVATION">
+              <MappingFragment StoreEntitySet="RESERVATION">
+                <ScalarProperty Name="res_ID" ColumnName="res_ID" />
+                <ScalarProperty Name="room_nr" ColumnName="room_nr" />
+                <ScalarProperty Name="checkIn_Date" ColumnName="checkIn_Date" />
+                <ScalarProperty Name="checkOut_Date" ColumnName="checkOut_Date" />
+                <ScalarProperty Name="e_mail" ColumnName="e_mail" />
+                <ScalarProperty Name="confirmed" ColumnName="confirmed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROOMs">
+            <EntityTypeMapping TypeName="DAT154Model.ROOM">
+              <MappingFragment StoreEntitySet="ROOM">
+                <ScalarProperty Name="room_ID" ColumnName="room_ID" />
+                <ScalarProperty Name="nr_beds" ColumnName="nr_beds" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="smoker" ColumnName="smoker" />
+                <ScalarProperty Name="quality" ColumnName="quality" />
+                <ScalarProperty Name="available" ColumnName="available" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERs">
+            <EntityTypeMapping TypeName="DAT154Model.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="e_mail_ID" ColumnName="e_mail_ID" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="f_name" ColumnName="f_name" />
+                <ScalarProperty Name="l_name" ColumnName="l_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
