@@ -25,11 +25,6 @@ namespace FrontDeskApp
         {
             InitializeComponent();
 
-            DbContext dx = new DbContext("Data Source=DESKTOP-U4HAM0I;Initial Catalog=DAT154;Integrated Security=True");
-            var users = dx.Set<USER>();
-            var rooms = dx.Set<ROOM>();
-            var requests = dx.Set<REQUEST>();
-            var reservations = dx.Set<RESERVATION>();
         }
     }
 }

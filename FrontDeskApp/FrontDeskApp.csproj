@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes.cs" />
     <Compile Include="FrontDeskAppModel.cs" />
     <Compile Include="Model1.cs">
       <AutoGen>True</AutoGen>
