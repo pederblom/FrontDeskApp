@@ -24,6 +24,8 @@ namespace FrontDeskApp
         public MainWindow()
         {
             InitializeComponent();
+            FrontDeskAppModel model = new FrontDeskAppModel();
+            model.getUsers();
 
         }
     }
