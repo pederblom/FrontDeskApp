@@ -43,9 +43,9 @@ namespace FrontDeskApp
             dx.SaveChanges();
         }
 
-        public void associateReservation(ROOM room, RESERVATION res)
+        public void associateReservation(int room_nr, RESERVATION res)
         {
-            res.ROOM = room;
+            res.ROOM = findRoom(room_nr);
 
             dx.SaveChanges();
         }
@@ -61,6 +61,25 @@ namespace FrontDeskApp
             RESERVATION res = dx.RESERVATIONs.Where(r => r.res_ID == res_ID).First();
             return res;
         }
+
+        public void createRequest(string type, string comment, int status, int room_nr)
+        {
+            REQUEST req = new REQUEST();
+            if (type.Equals("Cleaning"))
+            {
+                req.type = 1;
+            } else if (type.Equals("Service"))
+            {
+                req.type = 2;
+            } else
+            {
+                req.type = 3;
+            }
+            req.comment = comment;
+            req.status = 1;
+            req.ROOM = findRoom(room_nr);
+        }
+
 
     }
 }
