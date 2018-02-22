@@ -1,6 +1,8 @@
-﻿using System;
+﻿
+using FrontDeskApp;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,21 +13,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FrontDeskApp
+namespace FrontDeskApp.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RoomsWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RoomsWindow : Window
     {
-        public MainWindow()
+
+        private FrontDeskController controller;
+        private ObservableCollection<ROOM> Rooms;
+
+        public RoomsWindow()
         {
             InitializeComponent();
-            
+
+            controller = new FrontDeskController();
+            RoomList.DataContext = controller.GetRooms();
 
         }
+
     }
 }

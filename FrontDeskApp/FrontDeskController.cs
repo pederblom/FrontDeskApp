@@ -57,12 +57,12 @@ namespace FrontDeskApp
             return freeRooms;
         }
 
-        public void addReservation(string res_ID, string checkIn_Date, string checkOut_Date, string e_mail)
+        public void addReservation(string room_nr, string checkIn_Date, string checkOut_Date, string e_mail)
         {
             RESERVATION res = new RESERVATION();
             DateTime checkin = DateTime.ParseExact(checkIn_Date, "dd/MM/yy", CultureInfo.InvariantCulture);
             DateTime checkout = DateTime.ParseExact(checkOut_Date, "dd/MM/yy", CultureInfo.InvariantCulture);
-            res.res_ID = Int32.Parse(res_ID);
+            res.room_nr = Int32.Parse(room_nr);
             res.checkIn_Date = checkin;
             res.checkOut_Date = checkout;
             res.e_mail = e_mail;
@@ -80,14 +80,12 @@ namespace FrontDeskApp
             {
                 res.ROOM.available = true;
                 createRequest("Cleaning", "Check Out cleaning", res.ROOM.room_ID.ToString());
-                deleteReservation(res_ID);
+                deleteReservation(res);
             }
         }
 
-        public void deleteReservation(string res_ID)
+        public void deleteReservation(RESERVATION res)
         {
-            RESERVATION res = findReservation(res_ID);
-
             dx.RESERVATIONs.Remove(res);
 
             dx.SaveChanges();
@@ -135,11 +133,11 @@ namespace FrontDeskApp
             RESERVATION info = null;
             int row = ReservationList.SelectedIndex;
             DataRowView selectedReservation = ReservationList.Items.GetItemAt(row) as DataRowView;
-            int reservationID;
+            string reservationID;
             if (selectedReservation != null)
             {
-                reservationID = Convert.ToInt16(selectedReservation["Reservation Nr"]);
-                //info = Model.GetReservation(reservationID);
+                reservationID = Convert.ToString(selectedReservation["Reservation Nr"]);
+                info = findReservation(reservationID);
             }
             return info;
         }

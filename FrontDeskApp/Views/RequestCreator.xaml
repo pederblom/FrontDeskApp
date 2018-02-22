@@ -1,0 +1,24 @@
+﻿<Window x:Class="FrontDeskApp.Views.RequestCreator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FrontDeskApp.Views"
+        mc:Ignorable="d"
+        Title="New Request" Height="200" Width="550">
+    <Grid>
+        <TextBox x:Name="RoomNr" HorizontalAlignment="Left" Height="23" Margin="10,32,0,0" TextWrapping="Wrap" Text="Room Nr" VerticalAlignment="Top" Width="100"/>
+        <ListBox x:Name="TypeBox" HorizontalAlignment="Left" Height="Auto" Margin="10,86,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="ListBoxSelectionChanged">
+            <ListBoxItem x:Name="Cleaning">Cleaning</ListBoxItem>
+            <ListBoxItem x:Name="RoomService">Room Service</ListBoxItem>
+            <ListBoxItem x:Name="Maintenance">Maintenance</ListBoxItem>
+        </ListBox>
+        <Label x:Name="TypeLabel" Content="Type" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+        <Label Content="Comment" HorizontalAlignment="Left" Margin="124,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.055"/>
+        <Border HorizontalAlignment="Left" Margin="124,32,0,0" VerticalAlignment="Top" Height="118" Width="313" BorderThickness="1" BorderBrush="Black">
+            <TextBlock x:Name="Comment" HorizontalAlignment="Left" Margin="9,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" Width="293"/>
+        </Border>
+        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="447,131,0,0" VerticalAlignment="Top" Width="75" Click="SaveButton_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="447,102,0,0" VerticalAlignment="Top" Width="75" Click="CancelButton_Click"/>
+    </Grid>
+</Window>

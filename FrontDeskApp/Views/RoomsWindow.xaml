@@ -1,0 +1,26 @@
+﻿<Window x:Class="FrontDeskApp.Views.RoomsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FrontDeskApp.Views"
+        mc:Ignorable="d"
+        Title="Rooms" Height="600" Width="950">
+    <Grid>
+        <ListView Name="RoomList" ItemsSource="{Binding}" Margin="20">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Width="150" Header="Room Nr" DisplayMemberBinding="{Binding Path=room_ID}" />
+                        <GridViewColumn Width="150" Header="Size" DisplayMemberBinding="{Binding Path=size}" />
+                        <GridViewColumn Width="150" Header="Beds" DisplayMemberBinding="{Binding Path=nr_beds}" />
+                        <GridViewColumn Width="150" Header="Smoker" DisplayMemberBinding="{Binding Path=smoker}" />
+                        <GridViewColumn Width="150" Header="Quality" DisplayMemberBinding="{Binding Path=quality}" />
+                        <GridViewColumn Width="150" Header="Available" DisplayMemberBinding="{Binding Path=available}" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>

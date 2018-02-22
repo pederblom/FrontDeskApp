@@ -1,0 +1,22 @@
+﻿<Window x:Class="FrontDeskApp.Views.CheckInWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FrontDeskApp.Views"
+        mc:Ignorable="d"
+        Title="Check In" Height="180" Width="820">
+    <Grid>
+        <Label Content="Check in with reservation" FontSize="14" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="390"/>
+        <TextBox x:Name="ReservationNr" HorizontalAlignment="Left" Height="23" Margin="10,40,0,0" Text="Reservation Number" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Check in without reservation" FontSize="14" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="CheckInDate" HorizontalAlignment="Left" Height="38" Margin="10,98,0,0" Text="CheckIn Date (dd/mm/yy)" TextWrapping="Wrap" VerticalAlignment="Top" Width="94"/>
+        <TextBox x:Name="CheckOutDate" HorizontalAlignment="Left" Height="38" Margin="120,98,0,0" Text="CheckOut Date (dd/mm/yy)" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="Size" HorizontalAlignment="Left" Height="23" Margin="230,98,0,0" Text="Size" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="NrBeds" HorizontalAlignment="Left" Height="23" Margin="340,98,0,0" Text="Nr of beds" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="Smoker" HorizontalAlignment="Left" Height="23" Margin="450,98,0,0" Text="Smoker" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="Quality" HorizontalAlignment="Left" Height="23" Margin="560,98,0,0" Text="Quality" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <Button Content="Find Room" HorizontalAlignment="Left" Height="23" Margin="700,98,0,0" VerticalAlignment="Top" Width="85" Click="FindRoomButton_Click" RenderTransformOrigin="0.529,3.506"/>
+
+    </Grid>
+</Window>
