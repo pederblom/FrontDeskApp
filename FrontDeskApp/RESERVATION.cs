@@ -15,9 +15,9 @@ namespace FrontDeskApp
     public partial class RESERVATION
     {
         public int res_ID { get; set; }
-        public int room_nr { get; set; }
-        public System.DateTime checkIn_Date { get; set; }
-        public System.DateTime checkOut_Date { get; set; }
+        public Nullable<int> room_nr { get; set; }
+        public System.DateTime check_in_date { get; set; }
+        public System.DateTime check_out_date { get; set; }
         public string e_mail { get; set; }
         public bool confirmed { get; set; }
     

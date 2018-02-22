@@ -13,7 +13,7 @@ namespace FrontDeskApp
 {
     class FrontDeskController
     {
-        public HotelEntities dx = new HotelEntities();
+        public DAT154Entities dx = new DAT154Entities();
         public FrontDeskController()
         {
             
@@ -42,20 +42,22 @@ namespace FrontDeskApp
             RESERVATION res = findReservation(res_ID);
             if (res != null)
             {
-                int quality = res.ROOM.quality;
+                string quality = res.ROOM.quality;
                 int nr_beds = res.ROOM.nr_beds;
-                DateTime checkin = res.checkIn_Date;
-                DateTime checkout = res.checkOut_Date;
+                DateTime checkin = res.check_in_date;
+                DateTime checkout = res.check_out_date;
 
                 var rooms = dx.ROOMs.Where(r => r.quality == quality && r.nr_beds == nr_beds);
                 foreach (var r in rooms)
                 {
-                    if (r.RESERVATIONs.Where(rese => rese.checkIn_Date >= checkin && rese.checkIn_Date <= checkout) != null)
+                    if (r.RESERVATIONs.Where(rese => rese.check_in_date > checkin && rese.check_in_date < checkout) != null)
                         freeRooms.Add(r);
                 }
             }
             return freeRooms;
         }
+
+        //public ObservableCollection<ROOM>
 
         public void addReservation(string room_nr, string checkIn_Date, string checkOut_Date, string e_mail)
         {
@@ -63,8 +65,8 @@ namespace FrontDeskApp
             DateTime checkin = DateTime.ParseExact(checkIn_Date, "dd/MM/yy", CultureInfo.InvariantCulture);
             DateTime checkout = DateTime.ParseExact(checkOut_Date, "dd/MM/yy", CultureInfo.InvariantCulture);
             res.room_nr = Int32.Parse(room_nr);
-            res.checkIn_Date = checkin;
-            res.checkOut_Date = checkout;
+            res.check_in_date = checkin;
+            res.check_out_date = checkout;
             res.e_mail = e_mail;
             res.confirmed = false;
 
@@ -75,11 +77,12 @@ namespace FrontDeskApp
 
         public void CheckOut(string res_ID)
         {
-            RESERVATION res = dx.RESERVATIONs.Where(r => r.res_ID == Int32.Parse(res_ID)).First();
+            int resID = Int32.Parse(res_ID);
+            RESERVATION res = dx.RESERVATIONs.Where(r => r.res_ID == resID).First();
             if (res != null)
             {
                 res.ROOM.available = true;
-                createRequest("Cleaning", "Check Out cleaning", res.ROOM.room_ID.ToString());
+                CreateRequest("Cleaning", "Check Out cleaning", res.ROOM.room_ID.ToString());
                 deleteReservation(res);
             }
         }
@@ -94,66 +97,48 @@ namespace FrontDeskApp
         public void associateReservation(string room_nr, RESERVATION res)
         {
             res.ROOM = findRoom(room_nr);
-
+            res.confirmed = true;
+            res.ROOM.available = false;
             dx.SaveChanges();
         }
 
         public ROOM findRoom(string roomnumber)
         {
-            ROOM room = dx.ROOMs.Where(r => r.room_ID == Int32.Parse(roomnumber)).First();
+            int roomID = Int32.Parse(roomnumber);
+            ROOM room = dx.ROOMs.Where(r => r.room_ID == roomID).First();
             return room;
         }
 
         public RESERVATION findReservation(string res_ID)
         {
-            RESERVATION res = dx.RESERVATIONs.Where(r => r.res_ID == Int32.Parse(res_ID)).First();
+            int resID = Int32.Parse(res_ID);
+            RESERVATION res = dx.RESERVATIONs.Where(r => r.res_ID == resID).First();
             return res;
         }
 
-        public void createRequest(string type, string comment, string room_nr)
+        public void CreateRequest(string type, string comment, string room_nr)
         {
             REQUEST req = new REQUEST();
-            if (type.Equals("Cleaning"))
-            {
-                req.type = 1;
-            } else if (type.Equals("Service"))
-            {
-                req.type = 2;
-            } else
-            {
-                req.type = 3;
-            }
+            req.type = type;
             req.comment = comment;
-            req.status = 1;
+            req.status = "New";
             req.ROOM = findRoom(room_nr);
+
+            dx.REQUESTs.Add(req);
+
+            dx.SaveChanges();
         }
 
         public RESERVATION GetReservation(ListView ReservationList)
         {
-            RESERVATION info = null;
-            int row = ReservationList.SelectedIndex;
-            DataRowView selectedReservation = ReservationList.Items.GetItemAt(row) as DataRowView;
-            string reservationID;
-            if (selectedReservation != null)
-            {
-                reservationID = Convert.ToString(selectedReservation["Reservation Nr"]);
-                info = findReservation(reservationID);
-            }
+            RESERVATION info = (RESERVATION)ReservationList.SelectedItems[0];
             return info;
         }
 
         public int GetRoom(ListView RoomList)
         {
-            int row = RoomList.SelectedIndex;
-            DataRowView selectedRoom = RoomList.Items.GetItemAt(row) as DataRowView;
-            int roomNr = 0;
-
-            // Trenger exception handling hvis selectedRoom == null
-            if (selectedRoom != null)
-            {
-                roomNr = Convert.ToInt16(selectedRoom["Room Nr"]);
-            }
-            return roomNr;
+            ROOM room = (ROOM)RoomList.SelectedItems[0];
+            return room.room_ID;
         }
 
     }

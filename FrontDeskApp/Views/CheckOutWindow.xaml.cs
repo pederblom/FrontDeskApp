@@ -20,9 +20,11 @@ namespace FrontDeskApp.Views
     public partial class CheckOutWindow : Window
     {
 
+        FrontDeskController controller;
         public CheckOutWindow()
         {
             InitializeComponent();
+            controller = new FrontDeskController();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -34,7 +36,7 @@ namespace FrontDeskApp.Views
         {
             if (ResNrBox.Text != "Reservation Nr" && ResNrBox.Text != null)
             {
-                // controller.CheckOut(ResNrBox.Text);
+                controller.CheckOut(ResNrBox.Text);
                 Close();
             }
         }

@@ -24,7 +24,6 @@ namespace FrontDeskApp.Views
 
         private FrontDeskController controller;
 
-        private ObservableCollection<ROOM> Rooms;
 
         public CheckInWindow()
         {
@@ -42,15 +41,16 @@ namespace FrontDeskApp.Views
 
                 // RESERVATION res = controller.GetReservation(ReservationNr.Text);
 
-                // CheckInResults cIR = new CheckInResults(res, Rooms);
-                // cIR.Show();
-                
-            } else
+                 CheckInResults cIR = new CheckInResults(ReservationNr.Text);
+                 cIR.Show();
+
+            }
+            else
             {
                 // Rooms = controller.GetRoomsWithoutReservation(CheckInDate.Text, CheckOutDate.Text, Size.Text, NrBeds.text,
                 //      Smoker.Text, Quality.Text);
 
-                CheckInResults cIR = new CheckInResults(CheckInDate.Text, CheckOutDate.Text, Rooms);
+                // CheckInResults cIR = new CheckInResults(CheckInDate.Text, CheckOutDate.Text, Rooms);
             }
         }
     }

@@ -20,11 +20,13 @@ namespace FrontDeskApp.Views
     public partial class RequestCreator : Window
     {
 
-        private String type = null;
+        private string type;
+        FrontDeskController controller;
 
         public RequestCreator()
         {
             InitializeComponent();
+            controller = new FrontDeskController();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -36,7 +38,7 @@ namespace FrontDeskApp.Views
         {
             if(type != null && RoomNr.Text != null && RoomNr.Text != "Room Nr")
             {
-                // controller.CreateRequest(Int32.Parse(RoomNr.Text), type, Comment.Text);
+                controller.CreateRequest(type, Comment.Text, RoomNr.Text);
                 SaveButton.IsEnabled = false;
             }
         }
@@ -44,7 +46,8 @@ namespace FrontDeskApp.Views
         private void ListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox listbox = sender as ListBox;
-            type = listbox.SelectedItem as String;
+            ListBoxItem item = (ListBoxItem)listbox.SelectedItem;
+            type = item.Content.ToString();
         }
     }
 }

@@ -14,10 +14,10 @@ namespace FrontDeskApp
     
     public partial class REQUEST
     {
-        public int req_nr { get; set; }
-        public int type { get; set; }
+        public int req_ID { get; set; }
+        public string type { get; set; }
         public string comment { get; set; }
-        public int status { get; set; }
+        public string status { get; set; }
         public int room_nr { get; set; }
     
         public virtual ROOM ROOM { get; set; }

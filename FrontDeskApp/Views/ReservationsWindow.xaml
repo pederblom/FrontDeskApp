@@ -13,8 +13,8 @@
                     <GridView.Columns>
                         <GridViewColumn Width="125" Header="Reservation Nr" DisplayMemberBinding="{Binding Path=res_ID}" />
                         <GridViewColumn Width="75" Header="Room Nr" DisplayMemberBinding="{Binding Path=room_nr}" />
-                        <GridViewColumn Width="150" Header="Check In Date" DisplayMemberBinding="{Binding Path=checkIn_Date}" />
-                        <GridViewColumn Width="150" Header="Check Out Date" DisplayMemberBinding="{Binding Path=checkOut_Date}" />
+                        <GridViewColumn Width="150" Header="Check In Date" DisplayMemberBinding="{Binding Path=check_in_date}" />
+                        <GridViewColumn Width="150" Header="Check Out Date" DisplayMemberBinding="{Binding Path=check_out_date}" />
                         <GridViewColumn Width="275" Header="E-mail" DisplayMemberBinding="{Binding Path=e_mail}" />
                         <GridViewColumn Width="125" Header="Confirmed" DisplayMemberBinding="{Binding Path=confirmed}" />
                     </GridView.Columns>

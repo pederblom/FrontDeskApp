@@ -13,10 +13,10 @@ namespace FrontDeskApp
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HotelEntities : DbContext
+    public partial class DAT154Entities : DbContext
     {
-        public HotelEntities()
-            : base("name=HotelEntities")
+        public DAT154Entities()
+            : base("name=DAT154Entities")
         {
         }
     

@@ -22,7 +22,7 @@ namespace FrontDeskApp.Views
     {
 
         private FrontDeskController controller;
-        private int roomNr;
+        private string roomNr;
         private String checkIn;
         private String checkOut;
         private String eMail;
@@ -35,7 +35,7 @@ namespace FrontDeskApp.Views
 
         }
 
-        public ReservationCreator(int roomNr, String checkIn, String checkOut, String eMail)
+        public ReservationCreator(string roomNr, String checkIn, String checkOut, String eMail)
         {
             InitializeComponent();
 

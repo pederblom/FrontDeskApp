@@ -24,18 +24,17 @@ namespace FrontDeskApp.Views
 
         private FrontDeskController controller;
 
-        private RESERVATION reservation = null;
-        private ObservableCollection<ROOM> Rooms;
+        private string reservation = null;
         private String checkIn;
         private String checkOut;
 
-        public CheckInResults(RESERVATION res, ObservableCollection<ROOM> Rooms)
+        public CheckInResults(string res)
         {
             InitializeComponent();
 
             controller = new FrontDeskController();
-
-            this.Rooms = Rooms;
+            RoomList.DataContext = controller.GetRoomsForReservation(res);
+            
             reservation = res;
         }
 
@@ -47,7 +46,7 @@ namespace FrontDeskApp.Views
 
             checkIn = checkInDate;
             checkOut = checkOutDate;
-            this.Rooms = Rooms;
+            //this.R = Rooms;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -57,11 +56,12 @@ namespace FrontDeskApp.Views
 
             if (Email.Text == "Guest E-mail" && reservation != null)
             {
-                // controller.associateRoom(res, selectedRoom);
+                RESERVATION res = controller.findReservation(reservation);
+                controller.associateReservation(selectedRoom.ToString(), res);
 
             } else
             {
-                ReservationCreator resCreator = new ReservationCreator(selectedRoom, checkIn, checkOut, Email.Text);
+                ReservationCreator resCreator = new ReservationCreator(selectedRoom.ToString(), checkIn, checkOut, Email.Text);
             }
 
             Close();

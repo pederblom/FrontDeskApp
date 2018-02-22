@@ -23,9 +23,9 @@ namespace FrontDeskApp
     
         public int room_ID { get; set; }
         public int nr_beds { get; set; }
-        public int size { get; set; }
+        public string size { get; set; }
         public bool smoker { get; set; }
-        public int quality { get; set; }
+        public string quality { get; set; }
         public bool available { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

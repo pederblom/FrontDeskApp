@@ -16,7 +16,7 @@
         <Label x:Name="TypeLabel" Content="Type" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
         <Label Content="Comment" HorizontalAlignment="Left" Margin="124,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.055"/>
         <Border HorizontalAlignment="Left" Margin="124,32,0,0" VerticalAlignment="Top" Height="118" Width="313" BorderThickness="1" BorderBrush="Black">
-            <TextBlock x:Name="Comment" HorizontalAlignment="Left" Margin="9,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" Width="293"/>
+            <TextBox x:Name="Comment" AcceptsReturn="true" HorizontalAlignment="Left" Margin="9,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" Width="293"/>
         </Border>
         <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="447,131,0,0" VerticalAlignment="Top" Width="75" Click="SaveButton_Click"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="447,102,0,0" VerticalAlignment="Top" Width="75" Click="CancelButton_Click"/>

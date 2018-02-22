@@ -37,8 +37,8 @@ namespace FrontDeskApp.Views
         {
             ID.Text = selectedReservation.res_ID.ToString();
             RoomNr.Text = selectedReservation.room_nr.ToString();
-            CheckInDate.Text = selectedReservation.checkIn_Date.ToString();
-            CheckOutDate.Text = selectedReservation.checkOut_Date.ToString();
+            CheckInDate.Text = selectedReservation.check_in_date.ToString();
+            CheckOutDate.Text = selectedReservation.check_out_date.ToString();
             Email.Text = selectedReservation.e_mail;
             Confirmed.Text = selectedReservation.confirmed.ToString();
         }

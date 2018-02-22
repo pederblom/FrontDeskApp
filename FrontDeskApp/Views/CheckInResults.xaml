@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="Check In - Choose Room" Height="700" Width="950">
     <Grid>
-        <ListView Name="RoomList" ItemsSource="{Binding Source=Rooms}" Margin="20,20,20,100">
+        <ListView Name="RoomList" ItemsSource="{Binding}" Margin="26,20,14,100.4">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn Width="150" Header="Room Nr" DisplayMemberBinding="{Binding Path=ID}" />
+                        <GridViewColumn Width="150" Header="Room Nr" DisplayMemberBinding="{Binding Path=room_ID}" />
                         <GridViewColumn Width="150" Header="Size" DisplayMemberBinding="{Binding Path=size}" />
-                        <GridViewColumn Width="150" Header="Beds" DisplayMemberBinding="{Binding Path=beds}" />
+                        <GridViewColumn Width="150" Header="Beds" DisplayMemberBinding="{Binding Path=nr_beds}" />
                         <GridViewColumn Width="150" Header="Smoker" DisplayMemberBinding="{Binding Path=smoker}" />
                         <GridViewColumn Width="150" Header="Quality" DisplayMemberBinding="{Binding Path=quality}" />
                         <GridViewColumn Width="150" Header="Available" DisplayMemberBinding="{Binding Path=available}" />
